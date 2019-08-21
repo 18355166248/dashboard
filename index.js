@@ -18,6 +18,8 @@ window.onload = function() {
   const dotSpeed = 0.06
   const txtSpeed = Math.round((dotSpeed * 40000) / deg1)
 
+  const arrowImg = new Image()
+  arrowImg.src = './arrow.png'
   ;(function drawFrame() {
     ctx.save()
     ctx.clearRect(0, 0, cWidth, cHeight)
@@ -26,12 +28,15 @@ window.onload = function() {
 
     dot.x = radius * Math.cos(angle)
     dot.y = radius * Math.sin(angle)
+    dot.xL = (radius - 16) * Math.cos(angle)
+    dot.yL = (radius - 16) * Math.sin(angle)
 
     const aim = (score * deg1) / 40000
     if (angle < aim) {
       angle += dotSpeed
     }
-
+    // console.log(angle / max * 140)
+    // console.log(angle)
     // 画滚动的点
     dot.draw(ctx)
 
@@ -45,14 +50,22 @@ window.onload = function() {
     }
     Txt(initNum)
 
-    // 画最高借款额度文字
+    // 画箭头
     ctx.save()
-    ctx.rotate(-8 * deg0)
-    ctx.fillStyle = 'rgba(0, 0, 0, 1)'
-    ctx.font = '16px MicroSoft Yahei'
+    ctx.rotate(angle + Math.PI / 2)
     ctx.textAlign = 'center'
-    ctx.fillText('最高借款额度', 0, -30)
+    ctx.drawImage(arrowImg, 0, 0, 62, 299, -31, -100, 62, 800)
+
     ctx.restore()
+
+    // 画最高借款额度文字
+    // ctx.save()
+    // ctx.rotate(-8 * deg0)
+    // ctx.fillStyle = 'rgba(0, 0, 0, 1)'
+    // ctx.font = '16px MicroSoft Yahei'
+    // ctx.textAlign = 'center'
+    // ctx.fillText('最高借款额度', 0, -30)
+    // ctx.restore()
 
     ctx.save()
     ctx.beginPath()
@@ -81,6 +94,14 @@ window.onload = function() {
     ctx.shadowOffsetX = 0
     ctx.shadowOffsetY = 10
     ctx.shadowBlur = 30
+    ctx.stroke()
+    ctx.restore()
+
+    ctx.save()
+    ctx.beginPath()
+    ctx.lineWidth = 11
+    ctx.strokeStyle = 'red'
+    ctx.arc(0, 0, 16, 0, Math.PI * 2, false)
     ctx.stroke()
     ctx.restore()
 
@@ -118,7 +139,7 @@ window.onload = function() {
     for (let i = 0; i < list.length; i++) {
       ctx.fillStyle = 'rgba(255, 255, 255)'
       ctx.font = '10px MicroSoft Yahei'
-      ctx.fillText(list[i], -10, -90)
+      ctx.fillText(list[i], -10, -135)
       ctx.rotate(deg1)
     }
     ctx.restore()
@@ -132,6 +153,8 @@ window.onload = function() {
   function Dot() {
     this.x = 0
     this.y = 0
+    this.xL = 0
+    this.yL = 0
     this.draw = function(ctx) {
       ctx.save()
       ctx.beginPath()
@@ -150,7 +173,7 @@ window.onload = function() {
     ctx.fillStyle = 'yellow'
     ctx.font = '700 45px MicroSoft Yahei'
     ctx.textAlign = 'center'
-    ctx.fillText(txt, 0, 20)
+    ctx.fillText(txt, 0, 90)
     ctx.restore()
   }
 }

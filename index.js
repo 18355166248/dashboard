@@ -6,7 +6,13 @@ window.onload = function() {
   const cHeight = c.height
   const scale = (window.screen.width / cWidth).toFixed(3)
   c.style.transform = `translate(-50%, -50%) scale(${scale})`
-  const list = ['0', '5万', '10万', '15万', '20万']
+  const list = [
+    { txt: 0, num: 0 },
+    { txt: '5万', num: 50000 },
+    { txt: '10万', num: 100000 },
+    { txt: '15万', num: 150000 },
+    { txt: '20万', num: 200000 }
+  ]
   const radius = cWidth / 3
   const deg0 = Math.PI / 9
   let angle = 0
@@ -94,7 +100,7 @@ window.onload = function() {
     // 画滚动的点
     dot.draw(ctx)
 
-    // 刻度线
+    // 刻度线  文字
     ctx.save()
     for (let i = 0; i < list.length; i++) {
       ctx.beginPath()
@@ -104,6 +110,41 @@ window.onload = function() {
       ctx.lineTo(145, 0)
       ctx.stroke()
       ctx.rotate(deg1)
+
+      ctx.save()
+      ctx.rotate(-deg1)
+      ctx.translate(155, 0)
+      switch (i) {
+        case 0:
+          ctx.translate(10, 0)
+          break
+        case 1:
+          ctx.translate(25, -10)
+          ctx.rotate(Math.PI / 1.23)
+          break
+        case 2:
+          ctx.translate(10, -13)
+          ctx.rotate(Math.PI / 2)
+          break
+        case 3:
+          ctx.translate(10, 0)
+          ctx.rotate(Math.PI / 5.3)
+          break
+        case 4:
+          ctx.translate(10, 0)
+          ctx.rotate(-Math.PI / 9)
+          break
+      }
+      // console.log(initNum, list[i].num)
+      if (initNum > list[i].num) {
+        ctx.fillStyle = 'rgba(255, 0, 0, 1)'
+      } else {
+        ctx.fillStyle = 'rgba(0, 0, 0, .4)'
+      }
+      
+      ctx.font = '12px MicroSoft Yahei'
+      ctx.fillText(list[i].txt, 0, 0)
+      ctx.restore()
     }
     ctx.restore()
 
@@ -123,15 +164,15 @@ window.onload = function() {
     ctx.restore()
 
     // 信用分数
-    ctx.save()
-    ctx.rotate(Math.PI / 2)
-    for (let i = 0; i < list.length; i++) {
-      ctx.fillStyle = 'rgba(255, 0, 0, 1)'
-      ctx.font = '12px MicroSoft Yahei'
-      ctx.fillText(list[i], -12, -160)
-      ctx.rotate(deg1)
-    }
-    ctx.restore()
+    // ctx.save()
+    // ctx.rotate(Math.PI / 2)
+    // for (let i = 0; i < list.length; i++) {
+    //   ctx.fillStyle = 'rgba(255, 0, 0, 1)'
+    //   ctx.font = '12px MicroSoft Yahei'
+    //   ctx.fillText(list[i], -12, -160)
+    //   ctx.rotate(deg1)
+    // }
+    // ctx.restore()
 
     // 画中心圆点
     ctx.save()

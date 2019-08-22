@@ -136,7 +136,7 @@ window.onload = function() {
           break
       }
       // console.log(initNum, list[i].num)
-      if (initNum > list[i].num) {
+      if (initNum >= list[i].num) {
         ctx.fillStyle = 'rgba(255, 0, 0, 1)'
       } else {
         ctx.fillStyle = 'rgba(0, 0, 0, .4)'

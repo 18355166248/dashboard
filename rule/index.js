@@ -13,31 +13,32 @@ window.onload = function() {
   ruleImg.src = './rule.png'
   ruleImg.onload = function() {
     let num = 0
-    const speed = 10
+    const speed = 20
     const max = 100000
     ;(function draw() {
       ctx.save()
       ctx.clearRect(0, 0, cWidth, cHeight)
 
       num += speed
-      if (num >= (max / 100)) {
-        num = max / 100
+      if (num >= (max / 50)) {
+        num = max / 50
+        // console.log(num)
       }
       for (let i = 0; i < 200; i++) {
         ctx.strokeStyle = '#6d8ff0'
         ctx.beginPath()
         if (i % 5 === 0) {
           ctx.lineWidth = 8
-          ctx.moveTo(77 + (i + 1) * 20 - num, 120)
-          ctx.lineTo(77 + (i + 1) * 20 - num, 145)
+          ctx.moveTo(77 + (i + 1) * speed - num, 120)
+          ctx.lineTo(77 + (i + 1) * speed - num, 145)
           ctx.font = '700 20px MicroSoft Yahei'
           ctx.textAlign = 'center'
           ctx.fillStyle = '#6d8ff0'
-          ctx.fillText(i * 100, 77 + (i + 1) * 20 - num, 170)
+          ctx.fillText(i * 100, 77 + (i + 1) * speed - num, 170)
         } else {
           ctx.lineWidth = 2
-          ctx.moveTo(77 + (i + 1) * 20 - num, 125)
-          ctx.lineTo(77 + (i + 1) * 20 - num, 140)
+          ctx.moveTo(77 + (i + 1) * speed - num, 125)
+          ctx.lineTo(77 + (i + 1) * speed - num, 140)
         }
         ctx.stroke()
       }

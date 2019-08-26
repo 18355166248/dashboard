@@ -8,4 +8,6 @@ html {
   overflow: hidden;
 }
 
-#canvas {}
+.box {
+  text-align: center;
+}

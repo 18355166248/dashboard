@@ -3,6 +3,8 @@ window.onload = function() {
   const max = parseFloat(c.dataset.max)
   const ctx = c.getContext('2d')
   let number = 0
+  const activeColor = '#6d8ff0'
+  const noColor = '#ccc'
 
   c.style.width = window.screen.width - 60 + 'px'
   c.style.height = (728 / 678) * window.screen.width - 60 + 'px'
@@ -38,21 +40,27 @@ window.onload = function() {
       if (txt >= max) {
         txt = max
       }
+
       ctx.fillText('￥' + txt, 340, 275)
       ctx.restore()
 
       for (let i = 0; i < max / step / 20 + 15; i++) {
-        ctx.strokeStyle = '#6d8ff0'
+        let nn = i * step * 20
+        let color = ''
+        if (nn >= txt + 100) color = noColor
+        else color = activeColor
+        ctx.strokeStyle = color
         ctx.beginPath()
         if (i % 5 === 0) {
           ctx.lineWidth = 4
           ctx.moveTo(start + (i + 1) * speed - num, 120)
           ctx.lineTo(start + (i + 1) * speed - num, 145)
+
           ctx.font = '700 20px MicroSoft Yahei'
           ctx.textAlign = 'center'
-          ctx.fillStyle = '#6d8ff0'
+          ctx.fillStyle = color
 
-          ctx.fillText(i * step * 20, start + (i + 1) * speed - num, 170)
+          ctx.fillText(nn, start + (i + 1) * speed - num, 170)
         } else {
           ctx.lineWidth = 2
           ctx.moveTo(start + (i + 1) * speed - num, 125)

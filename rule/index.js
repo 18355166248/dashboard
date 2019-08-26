@@ -1,6 +1,6 @@
 window.onload = function() {
   const c = document.getElementById('canvas')
-  const score = parseFloat(c.dataset.score)
+  const max = parseFloat(c.dataset.max)
   const ctx = c.getContext('2d')
   let number = 0
 
@@ -15,7 +15,6 @@ window.onload = function() {
   ruleImg.onload = function() {
     let num = 0
     const speed = 20
-    const max = 200000
     const start = 63
     const step = 100 // 步进器
     ;(function draw() {

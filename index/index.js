@@ -1,11 +1,18 @@
 window.onload = function() {
   const c = document.getElementById('canvas')
+  const box = document.getElementById('box')
   const score = parseFloat(c.dataset.score)
   const ctx = c.getContext('2d')
+
+  c.style.width = window.screen.width + 'px'
+  c.style.height = window.screen.width + 'px'
+
   const cWidth = c.width
   const cHeight = c.height
-  const scale = (window.screen.width / cWidth).toFixed(3)
-  c.style.transform = `translate(-50%, -50%) scale(${scale})`
+
+  // const scale = (window.screen.width / 1000).toFixed(3)
+  // c.style.transform = `translate(-50%, -50%) scale(${scale})`
+
   const list = [
     { txt: 0, num: 0 },
     { txt: '5万', num: 50000 },
@@ -57,7 +64,7 @@ window.onload = function() {
     ctx.save()
     ctx.rotate(angle + Math.PI / 2)
     ctx.textAlign = 'center'
-    ctx.drawImage(arrowImg, 0, 0, 62, 299, -15.5, -100, 31, 149.5)
+    ctx.drawImage(arrowImg, 0, 0, 62, 299, -15.5, -330, 31, 500)
 
     ctx.restore()
 
@@ -65,24 +72,24 @@ window.onload = function() {
     ctx.save()
     ctx.rotate(-8 * deg0)
     ctx.fillStyle = 'rgba(154, 173, 255, 1)'
-    ctx.font = '20px MicroSoft Yahei'
+    ctx.font = '56px MicroSoft Yahei'
     ctx.textAlign = 'center'
-    ctx.fillText('最高借款额度', 0, 120)
+    ctx.fillText('最高借款额度', 0, 370)
     ctx.restore()
 
     // 灰色轨道
     ctx.save()
     ctx.beginPath()
-    ctx.lineWidth = 4
+    ctx.lineWidth = 10
     ctx.strokeStyle = 'rgba(0, 0, 0, .05)'
-    ctx.arc(0, 0, radius + 8, 0, deg0 * 11, false)
+    ctx.arc(0, 0, radius + 24, 0, deg0 * 11, false)
     ctx.stroke()
     ctx.restore()
 
-    // 轨道
+    // 粉色轨道
     ctx.save()
     ctx.beginPath()
-    ctx.lineWidth = 12
+    ctx.lineWidth = 36
     ctx.strokeStyle = 'rgba(255, 0, 0, .3)'
     ctx.arc(0, 0, radius, 0, deg0 * 11, false)
     ctx.stroke()
@@ -91,7 +98,7 @@ window.onload = function() {
     // 画经过的弧线
     ctx.save()
     ctx.beginPath()
-    ctx.lineWidth = 12
+    ctx.lineWidth = 36
     ctx.strokeStyle = 'rgba(255, 0, 0, 1)'
     ctx.arc(0, 0, radius, 0, angle, false)
     ctx.stroke()
@@ -104,26 +111,26 @@ window.onload = function() {
     ctx.save()
     for (let i = 0; i < list.length; i++) {
       ctx.beginPath()
-      ctx.lineWidth = 2
+      ctx.lineWidth = 6
       ctx.strokeStyle = 'rgba(255, 0, 0, 1)'
-      ctx.moveTo(155, 0)
-      ctx.lineTo(145, 0)
+      ctx.moveTo(475, 0)
+      ctx.lineTo(445, 0)
       ctx.stroke()
       ctx.rotate(deg1)
 
       ctx.save()
       ctx.rotate(-deg1)
-      ctx.translate(155, 0)
+      ctx.translate(495, 0)
       switch (i) {
         case 0:
-          ctx.translate(10, 0)
+          ctx.translate(10, 10)
           break
         case 1:
-          ctx.translate(25, -10)
+          ctx.translate(40, -30)
           ctx.rotate(Math.PI / 1.23)
           break
         case 2:
-          ctx.translate(10, -13)
+          ctx.translate(10, -34)
           ctx.rotate(Math.PI / 2)
           break
         case 3:
@@ -131,7 +138,7 @@ window.onload = function() {
           ctx.rotate(Math.PI / 5.3)
           break
         case 4:
-          ctx.translate(10, 0)
+          ctx.translate(10, 10)
           ctx.rotate(-Math.PI / 9)
           break
       }
@@ -141,8 +148,8 @@ window.onload = function() {
       } else {
         ctx.fillStyle = 'rgba(0, 0, 0, .4)'
       }
-      
-      ctx.font = '12px MicroSoft Yahei'
+
+      ctx.font = '36px MicroSoft Yahei'
       ctx.fillText(list[i].txt, 0, 0)
       ctx.restore()
     }
@@ -153,10 +160,10 @@ window.onload = function() {
     for (let i = 0; i < 40; i++) {
       if (i % 10 !== 0) {
         ctx.beginPath()
-        ctx.lineWidth = 2
+        ctx.lineWidth = 4
         ctx.strokeStyle = 'rgba(0, 0, 0, .3)'
-        ctx.moveTo(150, 0)
-        ctx.lineTo(145, 0)
+        ctx.moveTo(465, 0)
+        ctx.lineTo(445, 0)
         ctx.stroke()
       }
       ctx.rotate(deg1 / 10)
@@ -177,26 +184,25 @@ window.onload = function() {
     // 画中心圆点
     ctx.save()
     ctx.beginPath()
-    ctx.lineWidth = 1
-    ctx.strokeStyle = 'rgb(255,0,0)'
-    ctx.arc(0, 0, 13, 0, Math.PI * 2, false)
+    ctx.lineWidth = 8
+    ctx.strokeStyle = 'rgb(255, 0, 0)'
+    ctx.arc(0, 0, 50, 0, Math.PI * 2, false)
     ctx.stroke()
     ctx.restore()
 
     ctx.save()
     ctx.beginPath()
-    ctx.arc(0, 0, 12, 0, Math.PI * 2, false)
-    ctx.fillStyle = '#fff'
+    ctx.fillStyle = 'rgb(255, 255, 255)'
+    ctx.arc(0, 0, 48, 0, Math.PI * 2, false)
     ctx.fill()
     ctx.restore()
 
     ctx.save()
     ctx.beginPath()
-    ctx.arc(0, 0, 6, 0, Math.PI * 2, false)
+    ctx.arc(0, 0, 22, 0, Math.PI * 2, false)
     ctx.fillStyle = 'rgb(255,0,0)'
     ctx.fill()
     ctx.restore()
-
     window.requestAnimationFrame(drawFrame)
 
     ctx.restore()
@@ -213,14 +219,14 @@ window.onload = function() {
       ctx.save()
       ctx.beginPath()
       ctx.fillStyle = 'rgb(255, 0, 0)'
-      ctx.arc(this.x, this.y, 6, Math.PI * 2, false)
+      ctx.arc(this.x, this.y, 18, Math.PI * 2, false)
       ctx.fill()
       ctx.restore()
 
       ctx.save()
       ctx.beginPath()
       ctx.fillStyle = '#fff'
-      ctx.arc(this.x, this.y, 3, Math.PI * 2, false)
+      ctx.arc(this.x, this.y, 8, Math.PI * 2, false)
       ctx.fill()
       ctx.restore()
     }
@@ -231,9 +237,17 @@ window.onload = function() {
     ctx.save()
     ctx.rotate(-8 * deg0)
     ctx.fillStyle = 'rgb(255,0,0)'
-    ctx.font = '700 45px MicroSoft Yahei'
+    ctx.font = '700 150px MicroSoft Yahei'
     ctx.textAlign = 'center'
-    ctx.fillText(txt, 0, 90)
+    ctx.fillText(txt, 0, 300)
+    ctx.restore()
+
+    // 画 ￥
+    ctx.save()
+    ctx.rotate(-8 * deg0)
+    ctx.fillStyle = 'rgba(255, 0, 0, .5)'
+    ctx.font = '80px MicroSoft Yahei'
+    ctx.fillText('￥', -320, 300)
     ctx.restore()
   }
 }
